@@ -7,8 +7,6 @@ const SearchJobSection = () => {
 
   const handleSearch = () => {
     console.log("Searching for:", searchTerm, "in", location);
-    // Example:
-    // window.location.href = `/jobs?query=${searchTerm}&location=${location}`;
   };
 
   return (
@@ -28,10 +26,10 @@ const SearchJobSection = () => {
           className="location-dropdown"
         >
           <option value="">Select Location</option>
-          <option value="new-york">New York</option>
-          <option value="san-francisco">San Francisco</option>
-          <option value="london">London</option>
-          <option value="remote">Remote</option>
+          <option value="New York, NY">New York</option>
+          <option value="San Francisco, CA">San Francisco</option>
+          <option value="London, UK">London</option>
+          <option value="Remote">Remote</option>
         </select>
 
         <button onClick={handleSearch} className="search-btn">
@@ -44,6 +42,24 @@ const SearchJobSection = () => {
 
 /* Homepage Component */
 const Homepage = () => {
+  // Sample job data
+  const jobs = [
+    { id: 1, title: "Software Engineer", company: "TechCorp", location: "New York, NY" },
+    { id: 2, title: "Data Analyst", company: "DataSolutions", location: "San Francisco, CA" },
+    { id: 3, title: "Marketing Manager", company: "BrandBoost", location: "London, UK" },
+    { id: 4, title: "UX Designer", company: "DesignHub", location: "Remote" },
+    { id: 5, title: "Project Manager", company: "BuildIt", location: "Austin, TX" },
+    { id: 6, title: "DevOps Engineer", company: "CloudTech", location: "Seattle, WA" },
+  ];
+
+  const handleApply = (jobId) => {
+    console.log("Applying for job:", jobId);
+  };
+
+  const handleViewDetails = (jobId) => {
+    console.log("Viewing details for job:", jobId);
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -66,6 +82,35 @@ const Homepage = () => {
 
       {/* Search Section */}
       <SearchJobSection />
+
+      {/* Job Listings */}
+      <section className="job-listings">
+        <h2>Job Listings</h2>
+        <div className="job-grid">
+          {jobs.map((job) => (
+            <div key={job.id} className="job-card">
+              <h3 className="job-title">{job.title}</h3>
+              <p className="job-company">{job.company}</p>
+              <p className="job-location">{job.location}</p>
+
+              <div className="job-buttons">
+                <button
+                  className="apply-btn"
+                  onClick={() => handleApply(job.id)}
+                >
+                  Apply
+                </button>
+                <button
+                  className="details-btn"
+                  onClick={() => handleViewDetails(job.id)}
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

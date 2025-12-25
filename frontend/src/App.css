@@ -90,3 +90,92 @@
 .search-btn:hover {
   background-color: #0264cd;
 }
+
+/*latest-jobs section*/
+/* Add this CSS to your stylesheet or component */
+
+.job-listings {
+  padding: 40px 20px;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.job-listings h2 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.job-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.job-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #007bff;
+}
+
+.job-company {
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.job-location {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #999;
+}
+
+.job-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.apply-btn,
+.details-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apply-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.apply-btn:hover {
+  background-color: #218838;
+}
+
+.details-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.details-btn:hover {
+  background-color: #0056b3;
+}
