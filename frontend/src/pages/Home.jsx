@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+//import Navbar from "../components/Navbar";
+import "./style.css";
 /* Search Job Section Component */
 const SearchJobSection = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -42,7 +43,6 @@ const SearchJobSection = () => {
 
 /* Homepage Component */
 const Homepage = () => {
-  // Sample job data
   const jobs = [
     { id: 1, title: "Software Engineer", company: "TechCorp", location: "New York, NY" },
     { id: 2, title: "Data Analyst", company: "DataSolutions", location: "San Francisco, CA" },
@@ -62,6 +62,9 @@ const Homepage = () => {
 
   return (
     <div>
+      {/* Navbar at the top */}
+      {/* <Navbar /> */}
+
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
@@ -71,10 +74,7 @@ const Homepage = () => {
             Whether you're a job seeker or an employee looking to advance, our platform
             makes it easy to find the perfect match.
           </p>
-          <button
-            className="find-jobs-btn"
-            onClick={() => (window.location.href = "/jobs")}
-          >
+          <button className="find-jobs-btn">
             Find Jobs
           </button>
         </div>
@@ -89,23 +89,13 @@ const Homepage = () => {
         <div className="job-grid">
           {jobs.map((job) => (
             <div key={job.id} className="job-card">
-              <h3 className="job-title">{job.title}</h3>
-              <p className="job-company">{job.company}</p>
-              <p className="job-location">{job.location}</p>
+              <h3>{job.title}</h3>
+              <p>{job.company}</p>
+              <p>{job.location}</p>
 
               <div className="job-buttons">
-                <button
-                  className="apply-btn"
-                  onClick={() => handleApply(job.id)}
-                >
-                  Apply
-                </button>
-                <button
-                  className="details-btn"
-                  onClick={() => handleViewDetails(job.id)}
-                >
-                  View Details
-                </button>
+                <button onClick={() => handleApply(job.id)}>Apply</button>
+                <button onClick={() => handleViewDetails(job.id)}>View Details</button>
               </div>
             </div>
           ))}

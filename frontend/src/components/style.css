@@ -1,0 +1,71 @@
+/* Navbar container */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Logo */
+nav div a {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #0a83fc;
+}
+
+/* Navigation list */
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 25px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Nav links */
+nav ul li a {
+  position: relative;
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  padding-bottom: 5px;
+}
+
+/* Underline effect */
+nav ul li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #007bff;
+  transition: width 0.3s ease;
+}
+
+/* Hover underline animation */
+nav ul li a:hover::after {
+  width: 100%;
+   color: #007bff;
+}
+
+
+/* Login/Register button */
+nav button {
+  padding: 8px 18px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Button hover */
+nav button:hover {
+  background-color: #0056b3;
+}

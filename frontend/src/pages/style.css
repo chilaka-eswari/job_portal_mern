@@ -1,0 +1,286 @@
+/* Page background */
+.login-body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e293b, #020617);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Login card */
+.wrapper {
+  width: 360px;
+  background: #ffffff;
+  padding: 30px 25px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Heading */
+.wrapper h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+/* Input box */
+.input-box {
+  margin-bottom: 15px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cbd5f5;
+  border-radius: 4px;
+  outline: none;
+  font-size: 14px;
+}
+
+.input-box input:focus {
+  border-color: #2563eb;
+}
+
+/* Remember & forgot section */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 15px;
+}
+
+.remember-forgot label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.remember-forgot a {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+/* Login button */
+.button-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.button-btn:hover {
+  background-color: #1d4ed8;
+}
+
+/* Register link */
+.register-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+/* General reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ---------------- HERO SECTION ---------------- */
+.hero {
+  /* background: linear-gradient(135deg, #007bff, #0056b3); */
+  color: #ffffff;
+  background: url("https://th.bing.com/th/id/R.98fc8d1b0aba440420209dcb832d544f?rik=c9egE3GqAeDNXw&riu=http%3a%2f%2fenergiosmaritime.com%2fimage%2fopenings.jpg&ehk=xQEvjSMnHjJr5pmaA%2bKBApiWIQckR00UmrLBIeezdRc%3d&risl=&pid=ImgRaw&r=0");
+   background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: auto;
+}
+
+.hero-heading {
+  font-size: 42px;
+  margin-bottom: 15px;
+  color: #007bff;
+}
+
+.hero-description {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.find-jobs-btn {
+  padding: 12px 28px;
+  font-size: 16px;
+  border: none;
+  background-color: #3d96f6;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.find-jobs-btn:hover {
+  background-color: #037dff;
+}
+
+/* ---------------- SEARCH SECTION ---------------- */
+.search-job {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+}
+
+.search-container {
+  display: flex;
+  gap: 15px;
+  max-width: 900px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.search-input,
+.location-dropdown {
+  flex: 1;
+  padding: 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.search-btn {
+  padding: 12px 25px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-btn:hover {
+  background-color: #0056b3;
+}
+
+/* ---------------- JOB LISTINGS ---------------- */
+.job-listings {
+  padding: 50px 20px;
+  background-color: #ffffff;
+}
+
+.job-listings h2 {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.job-card {
+  background-color: #f8f9fa;
+  padding: 25px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.job-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.job-card h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.job-card p {
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+/* ---------------- JOB BUTTONS ---------------- */
+.job-buttons {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.job-buttons button {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.job-buttons button:first-child {
+  background-color: #28a745;
+  color: #ffffff;
+}
+
+.job-buttons button:first-child:hover {
+  background-color: #218838;
+}
+
+.job-buttons button:last-child {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.job-buttons button:last-child:hover {
+  background-color: #0056b3;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 600px) {
+  .hero-heading {
+    font-size: 32px;
+  }
+
+  .search-container {
+    flex-direction: column;
+  }
+}
+
