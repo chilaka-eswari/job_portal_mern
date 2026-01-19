@@ -5,7 +5,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import JobListing from "./pages/jobListing";
 import JobDetails from "./pages/JobDetails";
+import ApplyForm from "./pages/ApplyForm"; 
 import "./App.css";
+
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/jobs" element={<JobListing />} />
         <Route path="/jobs/:id" element={<JobDetails />} />
+        <Route path="/apply" element={<ApplyForm />} />
+
       </Route>
 
       {/* Pages WITHOUT Navbar */}
