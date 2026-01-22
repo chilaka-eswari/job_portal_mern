@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import Footer from '../components/Footer';
 import { useNavigate } from "react-router-dom";
+import { displayAPI } from '../services/api';
 
 const JobListing = () => {
   const [jobTitle, setJobTitle] = useState('');
@@ -9,69 +10,32 @@ const JobListing = () => {
   const [jobType, setJobType] = useState('');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [salaryRange, setSalaryRange] = useState('');
+  
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const [jobs] = useState([
-    {
-      id: 1,
-      title: 'Software Engineer',
-      company: 'Tech Corp',
-      location: 'New York, NY',
-      description: 'Develop and maintain web applications using modern technologies.',
-      type: 'Full-time',
-      experience: 'Mid-level',
-      salary: '$80k - $100k'
-    },
-    {
-      id: 2,
-      title: 'Data Analyst',
-      company: 'Data Inc',
-      location: 'San Francisco, CA',
-      description: 'Analyze data and generate insights for business decisions.',
-      type: 'Part-time',
-      experience: 'Entry-level',
-      salary: '$50k - $70k'
-    },
-    {
-      id: 3,
-      title: 'Frontend Developer',
-      company: 'Web Solutions',
-      location: 'Austin, TX',
-      description: 'Build responsive user interfaces with React and CSS.',
-      type: 'Full-time',
-      experience: 'Senior-level',
-      salary: '$100k+'
-    },
-    {
-      id: 4,
-      title: 'UX Designer',
-      company: 'Design Studio',
-      location: 'Los Angeles, CA',
-      description: 'Design user experiences for web and mobile applications.',
-      type: 'Part-time',
-      experience: 'Mid-level',
-      salary: '$70k - $90k'
-    },
-    {
-      id: 5,
-      title: 'Backend Engineer',
-      company: 'Server Tech',
-      location: 'Seattle, WA',
-      description: 'Develop server-side logic and APIs for scalable applications.',
-      type: 'Full-time',
-      experience: 'Entry-level',
-      salary: '$60k - $80k'
-    },
-    {
-      id: 6,
-      title: 'Product Manager',
-      company: 'Innovate Ltd',
-      location: 'Chicago, IL',
-      description: 'Oversee product development from ideation to launch.',
-      type: 'Full-time',
-      experience: 'Senior-level',
-      salary: '$100k+'
+  // ✅ Fetch jobs from backend on component mount
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  const fetchJobs = async () => {
+    try {
+      setLoading(true);
+      const data = await displayAPI.getAllJobs();
+      if (data.success) {
+        setJobs(data.jobs || []);
+      } else {
+        setError('Failed to fetch jobs');
+      }
+    } catch (err) {
+      console.error('Error fetching jobs:', err);
+      setError('Error connecting to backend');
+    } finally {
+      setLoading(false);
     }
-  ]);
+  };
 
   const filteredJobs = jobs.filter(job => {
     return (
@@ -98,6 +62,41 @@ const JobListing = () => {
   const handleViewMore = () => {
     console.log('Loading more jobs...');
   };
+
+  if (loading) {
+    return (
+      <div className="job-listing-page">
+        <div className="job-listing-header">
+          <div className="header-content">
+            <h1>Explore Job Opportunities</h1>
+            <p>Find your perfect job match from thousands of opportunities</p>
+          </div>
+        </div>
+        <div style={{ textAlign: 'center', padding: '40px' }}>
+          <h2>Loading jobs...</h2>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="job-listing-page">
+        <div className="job-listing-header">
+          <div className="header-content">
+            <h1>Explore Job Opportunities</h1>
+            <p>Find your perfect job match from thousands of opportunities</p>
+          </div>
+        </div>
+        <div style={{ textAlign: 'center', padding: '40px', color: 'red' }}>
+          <h2>❌ {error}</h2>
+          <p>Make sure backend server is running on port 5000</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="job-listing-page">
