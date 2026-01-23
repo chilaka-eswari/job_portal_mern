@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import Navbar from "../components/Navbar";
 import "./style.css";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
+import { displayAPI } from "../services/api";
 
 
 
@@ -49,14 +50,31 @@ const SearchJobSection = () => {
 /* Homepage Component */
 const Homepage = () => {
   const navigate = useNavigate();
-  const jobs = [
-    { id: 1, title: "Software Engineer", company: "TechCorp", location: "New York, NY" },
-    { id: 2, title: "Data Analyst", company: "DataSolutions", location: "San Francisco, CA" },
-    { id: 3, title: "Marketing Manager", company: "BrandBoost", location: "London, UK" },
-    { id: 4, title: "UX Designer", company: "DesignHub", location: "Remote" },
-    { id: 5, title: "Project Manager", company: "BuildIt", location: "Austin, TX" },
-    { id: 6, title: "DevOps Engineer", company: "CloudTech", location: "Seattle, WA" },
-  ];
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch jobs from database on component mount
+  useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        setLoading(true);
+        const data = await displayAPI.getAllJobs();
+        if (data.success && data.jobs) {
+          setJobs(data.jobs);
+        } else {
+          setError("Failed to fetch jobs");
+        }
+      } catch (err) {
+        console.error("Error fetching jobs:", err);
+        setError("Error fetching jobs from database");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJobs();
+  }, []);
 
   const handleApply = (jobId) => {
     navigate(`/apply/${jobId}`);
@@ -89,20 +107,30 @@ const Homepage = () => {
       {/* Job Listings */}
       <section className="job-listings">
         <h2>Job Listings</h2>
-        <div className="job-grid">
-          {jobs.map((job) => (
-            <div key={job.id} className="job-card">
-              <h3>{job.title}</h3>
-              <p>{job.company}</p>
-              <p>{job.location}</p>
+        
+        {loading && <p className="loading-message">Loading jobs...</p>}
+        {error && <p className="error-message">{error}</p>}
+        
+        {!loading && !error && jobs.length === 0 && (
+          <p className="no-jobs-message">No jobs available at the moment.</p>
+        )}
 
-              <div className="job-buttons">
-                <button onClick={() => handleApply(job.id)}>Apply</button>
-                <button onClick={() => handleViewDetails(job.id)}>View Details</button>
+        {!loading && !error && jobs.length > 0 && (
+          <div className="job-grid">
+            {jobs.slice(0, 6).map((job) => (
+              <div key={job._id || job.id} className="job-card">
+                <h3>{job.jobTitle || job.title}</h3>
+                <p>{job.companyName || job.company}</p>
+                <p>{job.location}</p>
+
+                <div className="job-buttons">
+                  <button onClick={() => handleApply(job._id || job.id)}>Apply</button>
+                  <button onClick={() => handleViewDetails(job._id || job.id)}>View Details</button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         <div className="see-more-wrapper">
           <button

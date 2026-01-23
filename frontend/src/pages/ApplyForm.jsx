@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { applicationAPI } from "../services/api";
 import "./style.css";
 const ApplyForm = () => {
   const { jobId } = useParams();
   const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   // Sample job data - in a real app, fetch from API using jobId
   const jobData = {
@@ -97,7 +100,7 @@ const ApplyForm = () => {
     setFormData({ ...formData, educationList: updatedEducation });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.terms) {
@@ -105,8 +108,61 @@ const ApplyForm = () => {
       return;
     }
 
-    console.log("Application Submitted:", formData);
-    setSubmitted(true);
+    try {
+      setLoading(true);
+      setError("");
+
+      // Get user info from localStorage
+      const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+      if (!userInfo || !userInfo._id) {
+        setError("Please login to apply for jobs");
+        return;
+      }
+
+      // Prepare application data
+      const applicationData = {
+        applicant: userInfo._id,
+        job: jobId,
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email || userInfo.email,
+        phone: formData.mobile || userInfo.phone,
+        address: formData.address,
+        city: formData.city,
+        state: formData.state,
+        country: formData.country,
+        pincode: formData.pincode,
+        resume: formData.resumeName || "resume.pdf",
+        education: formData.educationList,
+        certifications: formData.professionalCert === "Yes" ? [{
+          name: formData.certName,
+          proficiency: formData.proficiency,
+          certNumber: formData.certNumber,
+          issueDate: formData.issueDate,
+        }] : [],
+      };
+
+      // Submit application to backend
+      const response = await applicationAPI.submitApplication(applicationData);
+
+      if (response.error) {
+        setError(response.error);
+        return;
+      }
+
+      console.log("Application submitted:", response);
+      setSubmitted(true);
+
+      // Redirect after 2 seconds
+      setTimeout(() => {
+        navigate("/jobs");
+      }, 2000);
+    } catch (err) {
+      console.error("Error submitting application:", err);
+      setError(err.message || "Failed to submit application");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // ---------------- SUCCESS PAGE ----------------
@@ -115,6 +171,7 @@ const ApplyForm = () => {
       <div style={styles.successBox}>
         <h2>🎉 Application Submitted Successfully</h2>
         <p>Thank you for applying. We will contact you shortly.</p>
+        <p style={{fontSize: '12px', marginTop: '20px', color: '#666'}}>Redirecting to jobs...</p>
       </div>
     );
   }
@@ -277,8 +334,10 @@ const ApplyForm = () => {
           <input type="checkbox" name="terms" onChange={handleChange} /> I agree to Terms & Conditions
         </label>
 
-        <button style={styles.button} type="submit">
-          Submit Application
+        {error && <div style={styles.errorMessage}>{error}</div>}
+
+        <button style={styles.button} type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Submit Application"}
         </button>
       </form>
     </div>
@@ -319,6 +378,14 @@ const styles = {
     border: "none",
     fontSize: "16px",
     cursor: "pointer",
+  },
+  errorMessage: {
+    background: "#f8d7da",
+    color: "#721c24",
+    padding: "12px",
+    borderRadius: "4px",
+    margin: "15px 0",
+    border: "1px solid #f5c6cb",
   },
   eduBox: {
     border: "1px solid #ddd",

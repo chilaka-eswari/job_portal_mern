@@ -41,9 +41,9 @@ const JobListing = () => {
     return (
       (jobTitle === '' || job.title.toLowerCase().includes(jobTitle.toLowerCase())) &&
       (location === '' || job.location.toLowerCase().includes(location.toLowerCase())) &&
-      (jobType === '' || job.type === jobType) &&
+      (jobType === '' || job.jobType === jobType) &&
       (experienceLevel === '' || job.experience === experienceLevel) &&
-      (salaryRange === '' || job.salary === salaryRange)
+      (salaryRange === '')
     );
   });
 
@@ -186,7 +186,7 @@ const JobListing = () => {
           <div className="jobs-grid">
             {filteredJobs.length > 0 ? (
               filteredJobs.map(job => (
-                <JobCard key={job.id} job={job} />
+                <JobCard key={job._id} job={job} />
               ))
             ) : (
               <div className="no-jobs-found">
@@ -215,7 +215,7 @@ const JobCard = ({ job }) => {
   const navigate = useNavigate();
 
   const handleApplyClick = () => {
-    navigate(`/apply/${job.id}`);
+    navigate(`/apply/${job._id}`);
   };
 
   const getTypeColor = (type) => {
@@ -223,9 +223,15 @@ const JobCard = ({ job }) => {
   };
 
   const getExperienceColor = (exp) => {
-    if (exp === 'Entry-level') return '#27ae60';
-    if (exp === 'Mid-level') return '#3498db';
+    if (exp === 'Entry Level') return '#27ae60';
+    if (exp === 'Mid Level') return '#3498db';
     return '#e74c3c';
+  };
+
+  // Format salary range
+  const formatSalary = (salary) => {
+    if (!salary || !salary.min || !salary.max) return 'Competitive';
+    return `$${salary.min.toLocaleString()} - $${salary.max.toLocaleString()}`;
   };
 
   return (
@@ -235,8 +241,8 @@ const JobCard = ({ job }) => {
           <h3 className="job-card-title">{job.title}</h3>
           <p className="job-card-company">{job.company}</p>
         </div>
-        <span className="job-card-badge" style={{ backgroundColor: getTypeColor(job.type) }}>
-          {job.type}
+        <span className="job-card-badge" style={{ backgroundColor: getTypeColor(job.jobType) }}>
+          {job.jobType}
         </span>
       </div>
 
@@ -245,7 +251,7 @@ const JobCard = ({ job }) => {
 
         <div className="job-card-meta">
           <span className="meta-item">📍 {job.location}</span>
-          <span className="meta-item">💰 {job.salary}</span>
+          <span className="meta-item">💰 {formatSalary(job.salary)}</span>
           <span 
             className="meta-item experience-badge" 
             style={{ backgroundColor: getExperienceColor(job.experience), color: 'white' }}
@@ -258,7 +264,7 @@ const JobCard = ({ job }) => {
       <div className="job-card-footer">
         <button 
           className="job-card-btn view-btn" 
-          onClick={() => navigate(`/jobs/${job.id}`)}
+          onClick={() => navigate(`/jobs/${job._id}`)}
         >
           View Details
         </button>

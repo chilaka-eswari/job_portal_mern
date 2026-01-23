@@ -92,6 +92,11 @@ export const authAPI = {
     return res.json();
   },
 
+  getUserById: async (userId) => {
+    const res = await fetch(`${API_BASE_URL}/auth/profile/${userId}`);
+    return res.json();
+  },
+
   updateProfile: async (userId, userData, token) => {
     const res = await fetch(`${API_BASE_URL}/auth/profile/${userId}`, {
       method: 'PUT',
@@ -142,12 +147,11 @@ export const jobAPI = {
 
 // ✅ Application Routes (for submitting/managing applications)
 export const applicationAPI = {
-  submitApplication: async (applicationData, token) => {
-    const res = await fetch(`${API_BASE_URL}/applications`, {
+  submitApplication: async (applicationData) => {
+    const res = await fetch(`${API_BASE_URL}/applications/submit`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(applicationData),
     });
@@ -155,7 +159,7 @@ export const applicationAPI = {
   },
 
   updateApplicationStatus: async (applicationId, status, token) => {
-    const res = await fetch(`${API_BASE_URL}/applications/${applicationId}`, {
+    const res = await fetch(`${API_BASE_URL}/applications/${applicationId}/status`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

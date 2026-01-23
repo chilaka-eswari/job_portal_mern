@@ -47,6 +47,16 @@ const Login = () => {
         localStorage.setItem("userEmail", data.user.email);
         localStorage.setItem("userName", `${data.user.firstName} ${data.user.lastName}`);
         localStorage.setItem("userType", data.user.userType);
+        
+        // Store complete user object for profile
+        localStorage.setItem("userInfo", JSON.stringify({
+          _id: data.user.id,
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          email: data.user.email,
+          phone: data.user.phone,
+          userType: data.user.userType,
+        }));
 
         if (rememberMe) {
           localStorage.setItem("rememberMe", "true");

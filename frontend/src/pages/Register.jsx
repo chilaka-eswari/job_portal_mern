@@ -23,7 +23,7 @@ const Register = () => {
     setSuccess("");
 
     // Validation
-    if (!fullName || !email || !userType || !password || !confirmPassword) {
+    if (!fullName || !email || !phone || !userType || !password || !confirmPassword) {
       setError("All fields are required");
       return;
     }
@@ -51,6 +51,7 @@ const Register = () => {
         firstName,
         lastName,
         email,
+        phone,
         userType,
         password,
       });
@@ -105,6 +106,17 @@ const Register = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={loading}
+            />
+          </div>
+
+          <div className="input-box">
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
               required
               disabled={loading}
             />

@@ -8,6 +8,7 @@ import JobDetails from "./pages/JobDetails";
 import ApplyForm from "./pages/ApplyForm";
 import Prepare from "./pages/Prepare";
 import PrepResume from "./pages/PrepResume";
+import ViewProfile from "./components/ViewProfile";
 
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/apply/:jobId" element={<ApplyForm />} />
         <Route path="/prepare" element={<Prepare />} />
         <Route path="/prepare-resume" element={<PrepResume />} />
+        <Route path="/view-profile" element={<ViewProfile />} />
       
 
       </Route>

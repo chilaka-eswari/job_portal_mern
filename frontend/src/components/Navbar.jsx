@@ -19,6 +19,11 @@ const Navbar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userEmail");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userType");
+    localStorage.removeItem("userInfo");
     setIsLoggedIn(false);
     setOpen(false);
     navigate("/login");
@@ -90,9 +95,24 @@ const Navbar = () => {
               <div className="profile-divider" />
 
               <ul className="profile-menu">
-                <li>View Profile</li>
-                <li>Applied Jobs</li>
-                <li>Saved Jobs</li>
+                <li onClick={() => {
+                  navigate("/view-profile");
+                  setOpen(false);
+                }}>
+                  View Profile
+                </li>
+                <li onClick={() => {
+                  navigate("/applied-jobs");
+                  setOpen(false);
+                }}>
+                  Applied Jobs
+                </li>
+                <li onClick={() => {
+                  navigate("/saved-jobs");
+                  setOpen(false);
+                }}>
+                  Saved Jobs
+                </li>
                 <li className="logout" onClick={handleLogout}>
                   Logout
                 </li>
