@@ -13,6 +13,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
@@ -26,6 +27,14 @@ const Login = () => {
     // Validation
     if (!email || !password) {
       setError("Email and password are required");
+      return;
+    }
+
+    // Email format validation - must be valid email with @gmail.com
+    const emailRegex = /^[^\s@]+@gmail\.com$/;
+    if (!emailRegex.test(email)) {
+      setError("Please enter a valid Gmail address (format: example@gmail.com)");
+      showToast("Invalid email format. Must be a valid Gmail address.", 'error');
       return;
     }
 
@@ -122,20 +131,27 @@ const Login = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
               disabled={loading}
             />
           </div>
 
           <div className="input-box">
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
               disabled={loading}
             />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+              disabled={loading}
+              title={showPassword ? "Hide password" : "Show password"}
+            >
+              {showPassword ? "👁️" : "👁️‍🗨️"}
+            </button>
           </div>
 
           <div className="remember-forgot">
