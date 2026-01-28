@@ -1,0 +1,47 @@
+<svg viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="600" height="750" fill="#E8EEF5"/>
+  
+  <!-- White paper background -->
+  <rect x="40" y="30" width="520" height="690" fill="white" rx="8" shadow="0 2px 8px rgba(0,0,0,0.1)"/>
+  
+  <!-- Left accent bar -->
+  <rect x="50" y="40" width="8" height="200" fill="#2C3E50" rx="4"/>
+  
+  <!-- Title -->
+  <text x="70" y="100" font-family="Georgia, serif" font-size="56" font-weight="normal" fill="#1A1A1A" font-style="italic">
+    Academic
+  </text>
+  <text x="70" y="170" font-family="Georgia, serif" font-size="56" font-weight="normal" fill="#1A1A1A" font-style="italic">
+    Template
+  </text>
+  
+  <!-- Section titles and content simulation -->
+  <text x="70" y="250" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">CONTACT INFORMATION</text>
+  <line x1="70" y1="260" x2="530" y2="260" stroke="#8E44AD" stroke-width="2"/>
+  
+  <text x="70" y="290" font-family="Arial, sans-serif" font-size="11" fill="#666">Name | Email | Phone | Location</text>
+  
+  <!-- Education section -->
+  <text x="70" y="340" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">EDUCATION</text>
+  <line x1="70" y1="350" x2="530" y2="350" stroke="#8E44AD" stroke-width="2"/>
+  
+  <text x="70" y="380" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1A1A1A">University Name, City</text>
+  <text x="70" y="398" font-family="Arial, sans-serif" font-size="10" fill="#666">Degree in Major | Expected Graduation: Year</text>
+  <text x="70" y="416" font-family="Arial, sans-serif" font-size="9" fill="#888">GPA: 3.8 | Relevant Coursework: Course 1, Course 2</text>
+  
+  <!-- Experience section -->
+  <text x="70" y="466" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">EXPERIENCE</text>
+  <line x1="70" y1="476" x2="530" y2="476" stroke="#8E44AD" stroke-width="2"/>
+  
+  <text x="70" y="506" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="#1A1A1A">Position Title</text>
+  <text x="70" y="524" font-family="Arial, sans-serif" font-size="10" fill="#666">Organization | Duration</text>
+  <text x="70" y="542" font-family="Arial, sans-serif" font-size="9" fill="#888">• Achievement or responsibility</text>
+  <text x="70" y="558" font-family="Arial, sans-serif" font-size="9" fill="#888">• Another key contribution</text>
+  
+  <!-- Skills section -->
+  <text x="70" y="608" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#2C3E50">SKILLS</text>
+  <line x1="70" y1="618" x2="530" y2="618" stroke="#8E44AD" stroke-width="2"/>
+  
+  <text x="70" y="648" font-family="Arial, sans-serif" font-size="10" fill="#666">Technical Skills | Languages | Research Methods</text>
+</svg>

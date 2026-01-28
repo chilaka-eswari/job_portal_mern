@@ -41,7 +41,7 @@ const ResumeTemplates = ({ onSelectTemplate }) => {
       id: 6,
       name: "Academic",
       description: "Best for academic and research positions",
-      preview: "/templates/academic-sample.svg",
+      preview: "/templates/academic-preview.svg",
       color: "#8E44AD"
     }
   ];
