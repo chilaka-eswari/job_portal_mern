@@ -1,45 +1,17 @@
-<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="300" height="400" fill="#FAFAFA" stroke="#DDD" stroke-width="1"/>
-  
-  <!-- Decorative header -->
-  <line x1="15" y1="15" x2="285" y2="15" stroke="#8E44AD" stroke-width="1.5"/>
-  <circle cx="23" cy="15" r="3" fill="#8E44AD"/>
-  <circle cx="277" cy="15" r="3" fill="#8E44AD"/>
-  
-  <!-- Name -->
-  <text x="15" y="35" font-size="13" font-weight="bold" fill="#34495E">Dr. MICHAEL RHODES</text>
-  <text x="15" y="48" font-size="8" fill="#8E44AD">Ph.D. in Computer Science</text>
-  
-  <!-- Contact -->
-  <text x="15" y="62" font-size="7" fill="#666">✉ michael@university.edu | ☎ (555) 567-8901</text>
-  
-  <!-- Section divider -->
-  <line x1="15" y1="70" x2="285" y2="70" stroke="#8E44AD" stroke-width="1" stroke-dasharray="2,2"/>
-  
-  <!-- Education (prominent) -->
-  <text x="15" y="88" font-size="9" font-weight="bold" fill="#8E44AD">ACADEMIC QUALIFICATIONS</text>
-  <rect x="15" y="92" width="270" height="1.5" fill="#8E44AD"/>
-  
-  <text x="15" y="107" font-size="8" font-weight="bold" fill="#34495E">Ph.D. Computer Science</text>
-  <text x="15" y="116" font-size="7" fill="#666">Tech University, 2018</text>
-  
-  <!-- Research -->
-  <text x="15" y="135" font-size="9" font-weight="bold" fill="#8E44AD">RESEARCH & PUBLICATIONS</text>
-  <rect x="15" y="139" width="270" height="1.5" fill="#8E44AD"/>
-  
-  <line x="15" y="154" x2="270" y2="154" stroke="#E8E8E8" stroke-width="1"/>
-  <line x="15" y="162" x2="250" y2="162" stroke="#E8E8E8" stroke-width="1"/>
-  
-  <!-- Teaching -->
-  <text x="15" y="182" font-size="9" font-weight="bold" fill="#8E44AD">TEACHING EXPERIENCE</text>
-  <rect x="15" y="186" width="270" height="1.5" fill="#8E44AD"/>
-  
-  <text x="15" y="200" font-size="8" font-weight="bold" fill="#34495E">Professor - Tech University</text>
-  
-  <!-- Memberships -->
-  <text x="15" y="220" font-size="9" font-weight="bold" fill="#8E44AD">MEMBERSHIPS</text>
-  <rect x="15" y="224" width="270" height="1.5" fill="#8E44AD"/>
-  
-  <line x="15" y="239" x2="260" y2="239" stroke="#E8E8E8" stroke-width="1"/>
+<svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Academic template preview">
+  <!-- Simple, lightweight preview for Academic template -->
+  <rect width="100%" height="100%" fill="#ffffff" stroke="#e6e6e6"/>
+
+  <!-- Purple header bar -->
+  <rect x="0" y="0" width="100%" height="36" fill="#8E44AD" />
+  <text x="16" y="24" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#ffffff" font-weight="700">Academic</text>
+
+  <!-- Large centered label -->
+  <text x="50%" y="60%" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#333333" font-weight="600">Academic</text>
+
+  <!-- Subtext -->
+  <text x="50%" y="74%" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="10" fill="#666666">Best for academic and research positions</text>
+
+  <!-- Decorative left accent -->
+  <rect x="12" y="48" width="6" height="96" fill="#8E44AD" rx="2"/>
 </svg>
