@@ -6,42 +6,42 @@ const ResumeTemplates = ({ onSelectTemplate }) => {
       id: 1,
       name: "Professional",
       description: "Clean and professional layout suitable for most industries",
-      preview: "professional-preview.svg",
+      preview: "/templates/professional-sample.svg",
       color: "#2C3E50"
     },
     {
       id: 2,
       name: "Modern",
       description: "Contemporary design with modern elements and color accents",
-      preview: "modern-preview.svg",
+      preview: "/templates/modern-sample.svg",
       color: "#3498DB"
     },
     {
       id: 3,
       name: "Creative",
       description: "Ideal for creative roles with unique layout and design",
-      preview: "creative-preview.svg",
+      preview: "/templates/creative-sample.svg",
       color: "#E74C3C"
     },
     {
       id: 4,
       name: "Minimalist",
       description: "Simple and elegant design focusing on content",
-      preview: "minimalist-preview.svg",
+      preview: "/templates/minimalist-sample.svg",
       color: "#34495E"
     },
     {
       id: 5,
       name: "Tech",
       description: "Perfect for tech and IT professionals",
-      preview: "tech-preview.svg",
+      preview: "/templates/tech-sample.svg",
       color: "#27AE60"
     },
     {
       id: 6,
       name: "Academic",
       description: "Best for academic and research positions",
-      preview: "academic-preview.svg",
+      preview: "/templates/academic-sample.svg",
       color: "#8E44AD"
     }
   ];
@@ -56,13 +56,12 @@ const ResumeTemplates = ({ onSelectTemplate }) => {
       <div className="templates-grid">
         {templates.map((template) => (
           <div key={template.id} className="template-card">
-            <div
-              className="template-preview"
-              style={{ borderLeftColor: template.color }}
-            >
-              <div className="template-icon" style={{ color: template.color }}>
-                📄
-              </div>
+            <div className="template-preview">
+              <img 
+                src={template.preview} 
+                alt={`${template.name} template`}
+                className="template-image"
+              />
             </div>
             <div className="template-info">
               <h3>{template.name}</h3>

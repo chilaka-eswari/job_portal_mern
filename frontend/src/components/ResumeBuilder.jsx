@@ -204,6 +204,16 @@ const ResumeBuilder = ({ selectedTemplate, resumeData, onDataChange }) => {
                   placeholder="John Doe"
                 />
               </div>
+              <div className="form-group">
+                <label>Professional Title</label>
+                <input
+                  type="text"
+                  name="jobTitle"
+                  value={data.personalInfo.jobTitle}
+                  onChange={handlePersonalInfoChange}
+                  placeholder="Software Engineer, Designer, etc."
+                />
+              </div>
               <div className="form-row">
                 <div className="form-group">
                   <label>Email *</label>

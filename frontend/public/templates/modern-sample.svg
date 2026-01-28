@@ -1,0 +1,46 @@
+<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="400" fill="#FFFFFF" stroke="#DDD" stroke-width="1"/>
+  
+  <!-- Blue accent -->
+  <rect width="6" height="400" fill="#3498DB"/>
+  
+  <!-- Header -->
+  <rect x="10" y="15" width="280" height="55" fill="#F0F8FF"/>
+  <text x="20" y="38" font-size="15" font-weight="bold" fill="#3498DB">SARAH JOHNSON</text>
+  <text x="20" y="52" font-size="9" fill="#3498DB">UI/UX Designer</text>
+  
+  <!-- Contact -->
+  <text x="10" y="80" font-size="8" fill="#666">sarah@email.com • (555) 234-5678</text>
+  
+  <!-- Section -->
+  <text x="10" y="100" font-size="10" font-weight="bold" fill="#3498DB">ABOUT</text>
+  <line x1="10" y1="104" x2="135" y2="104" stroke="#3498DB" stroke-width="1.5"/>
+  <line x1="10" y1="115" x2="290" y2="115" stroke="#E8E8E8" stroke-width="1"/>
+  <line x1="10" y1="123" x2="270" y2="123" stroke="#E8E8E8" stroke-width="1"/>
+  
+  <!-- Section 2 -->
+  <text x="10" y="145" font-size="10" font-weight="bold" fill="#3498DB">EXPERIENCE</text>
+  <line x1="10" y1="149" x2="170" y2="149" stroke="#3498DB" stroke-width="1.5"/>
+  
+  <text x="10" y="162" font-size="9" font-weight="bold" fill="#2C3E50">UI Designer - Design Studio</text>
+  <text x="10" y="172" font-size="8" fill="#666">Mar 2019 - Present</text>
+  <line x1="10" y1="181" x2="240" y2="181" stroke="#E8E8E8" stroke-width="1"/>
+  
+  <!-- Section 3 -->
+  <text x="10" y="202" font-size="10" font-weight="bold" fill="#3498DB">EDUCATION</text>
+  <line x1="10" y1="206" x2="170" y2="206" stroke="#3498DB" stroke-width="1.5"/>
+  
+  <text x="10" y="220" font-size="9" font-weight="bold" fill="#2C3E50">Bachelor of Design</text>
+  <text x="10" y="230" font-size="8" fill="#666">Design Institute, 2019</text>
+  
+  <!-- Skills section -->
+  <text x="10" y="252" font-size="10" font-weight="bold" fill="#3498DB">SKILLS</text>
+  <line x1="10" y1="256" x2="120" y2="256" stroke="#3498DB" stroke-width="1.5"/>
+  
+  <rect x="10" y="270" width="40" height="14" fill="#E3F2FD" stroke="#3498DB" stroke-width="0.5" rx="2"/>
+  <text x="30" y="280" font-size="7" fill="#3498DB" text-anchor="middle">Figma</text>
+  
+  <rect x="58" y="270" width="45" height="14" fill="#E3F2FD" stroke="#3498DB" stroke-width="0.5" rx="2"/>
+  <text x="81" y="280" font-size="7" fill="#3498DB" text-anchor="middle">Photoshop</text>
+</svg>

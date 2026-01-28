@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Footer from "../components/Footer";
 import "./style.css";
 import ResomeTemplates from "../components/ResumeTemplates";
-import ResumeBuilder from "../components/ResumeBuilder";
+import ResumeBuilderZety from "../components/ResumeBuilderZety";
 import ATSChecker from "../components/ATSChecker";
 
 const PrepResume = () => {
@@ -11,6 +11,7 @@ const PrepResume = () => {
   const [resumeData, setResumeData] = useState({
     personalInfo: {
       fullName: "",
+      jobTitle: "",
       email: "",
       phone: "",
       location: "",
@@ -66,7 +67,7 @@ const PrepResume = () => {
         )}
 
         {activeTab === "builder" && (
-          <ResumeBuilder
+          <ResumeBuilderZety
             selectedTemplate={selectedTemplate}
             resumeData={resumeData}  
             onDataChange={handleResumeDataChange}

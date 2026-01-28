@@ -1,0 +1,40 @@
+<svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="300" height="400" fill="#FFFFFF" stroke="#DDD" stroke-width="1"/>
+  
+  <!-- Top border -->
+  <line x1="0" y1="0" x2="300" y2="0" stroke="#27AE60" stroke-width="3"/>
+  
+  <!-- Header -->
+  <text x="15" y="20" font-size="9" fill="#27AE60" font-weight="600">DEVELOPER.IO</text>
+  <text x="15" y="30" font-size="7" fill="#27AE60" font-family="monospace">&lt; Full Stack Dev &gt;</text>
+  
+  <!-- Contact -->
+  <text x="15" y="45" font-size="7" fill="#27AE60">git@email.com</text>
+  <text x="150" y="45" font-size="7" fill="#27AE60">github.com/dev</text>
+  <line x1="15" y1="52" x2="285" y2="52" stroke="#27AE60" stroke-width="0.5" stroke-dasharray="2,2"/>
+  
+  <!-- Section -->
+  <rect x="15" y="62" width="5" height="5" fill="#27AE60"/>
+  <text x="25" y="67" font-size="8" font-weight="bold" fill="#27AE60">SKILLS</text>
+  
+  <text x="15" y="82" font-size="7" fill="#34495E">JavaScript</text>
+  <rect x="15" y="87" width="80" height="3" fill="#E8F8F5" stroke="#27AE60" stroke-width="0.5"/>
+  
+  <text x="15" y="102" font-size="7" fill="#34495E">React/Node</text>
+  <rect x="15" y="107" width="70" height="3" fill="#E8F8F5" stroke="#27AE60" stroke-width="0.5"/>
+  
+  <!-- Experience section -->
+  <rect x="15" y="130" width="5" height="5" fill="#27AE60"/>
+  <text x="25" y="135" font-size="8" font-weight="bold" fill="#27AE60">EXPERIENCE</text>
+  
+  <text x="15" y="150" font-size="8" font-weight="bold" fill="#34495E">Senior Dev - StartUp</text>
+  <text x="15" y="160" font-size="7" fill="#666">2019 - Present</text>
+  
+  <!-- Projects -->
+  <rect x="15" y="180" width="5" height="5" fill="#27AE60"/>
+  <text x="25" y="185" font-size="8" font-weight="bold" fill="#27AE60">PROJECTS</text>
+  
+  <line x="15" y="200" x2="250" y2="200" stroke="#E8E8E8" stroke-width="1"/>
+  <line x="15" y="208" x2="230" y2="208" stroke="#E8E8E8" stroke-width="1"/>
+</svg>
