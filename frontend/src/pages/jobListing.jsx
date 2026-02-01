@@ -3,6 +3,7 @@ import './style.css';
 import Footer from '../components/Footer';
 import { useNavigate } from "react-router-dom";
 import { displayAPI } from '../services/api';
+import AuthPromptModal from "../components/AuthPromptModal";
 
 const JobListing = () => {
   const [jobTitle, setJobTitle] = useState('');
@@ -14,6 +15,8 @@ const JobListing = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
 
   // ✅ Fetch jobs from backend on component mount
   useEffect(() => {
@@ -62,6 +65,9 @@ const JobListing = () => {
   const handleViewMore = () => {
     console.log('Loading more jobs...');
   };
+
+  const handleAuthRequired = () => setShowAuthModal(true);
+
 
   if (loading) {
     return (
@@ -186,7 +192,7 @@ const JobListing = () => {
           <div className="jobs-grid">
             {filteredJobs.length > 0 ? (
               filteredJobs.map(job => (
-                <JobCard key={job._id} job={job} />
+                <JobCard key={job._id} job={job} onAuthRequired={handleAuthRequired} />
               ))
             ) : (
               <div className="no-jobs-found">
@@ -206,15 +212,27 @@ const JobListing = () => {
 
       {/* Footer */}
       <Footer />
+
+      <AuthPromptModal
+        visible={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onLogin={() => { setShowAuthModal(false); window.location.href = '/login'; }}
+        onRegister={() => { setShowAuthModal(false); window.location.href = '/register'; }}
+      />
     </div>
   );
 };
 
 // JobCard Component
-const JobCard = ({ job }) => {
+const JobCard = ({ job, onAuthRequired }) => {
   const navigate = useNavigate();
 
   const handleApplyClick = () => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' || !!localStorage.getItem('userInfo');
+    if (!isLoggedIn) {
+      if (onAuthRequired) onAuthRequired();
+      return;
+    }
     navigate(`/apply/${job._id}`);
   };
 

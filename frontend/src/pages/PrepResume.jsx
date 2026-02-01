@@ -71,11 +71,8 @@ const PrepResume = () => {
             selectedTemplate={selectedTemplate}
             resumeData={resumeData}  
             onDataChange={handleResumeDataChange}
+            onChangeTemplate={() => setActiveTab('templates')}
           />
-        )}
-
-        {activeTab === "ats" && (
-          <ATSChecker resumeData={resumeData} />
         )}
       </div>
 

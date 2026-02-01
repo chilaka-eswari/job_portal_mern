@@ -4,6 +4,7 @@ import "./style.css";
 import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { displayAPI } from "../services/api";
+import AuthPromptModal from "../components/AuthPromptModal";
 
 
 
@@ -53,6 +54,7 @@ const Homepage = () => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Fetch jobs from database on component mount
   useEffect(() => {
@@ -77,6 +79,11 @@ const Homepage = () => {
   }, []);
 
   const handleApply = (jobId) => {
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' || !!localStorage.getItem('userInfo');
+    if (!isLoggedIn) {
+      setShowAuthModal(true);
+      return;
+    }
     navigate(`/apply/${jobId}`);
   };
 
@@ -143,6 +150,13 @@ const Homepage = () => {
         </div>
       </section>
       <Footer />
+
+      <AuthPromptModal
+        visible={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onLogin={() => { setShowAuthModal(false); window.location.href = '/login'; }}
+        onRegister={() => { setShowAuthModal(false); window.location.href = '/register'; }}
+      />
     </div>
 
   );

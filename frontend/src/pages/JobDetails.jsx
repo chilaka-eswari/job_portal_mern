@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { displayAPI, jobAPI } from "../services/api";
 import "./style.css";
 import Footer from "../components/Footer";
+import AuthPromptModal from "../components/AuthPromptModal";
 
 const JobDetails = () => {
   const { id } = useParams();
@@ -14,6 +15,7 @@ const JobDetails = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [toast, setToast] = useState(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   useEffect(() => {
     const userInfoStr = localStorage.getItem("userInfo");
@@ -65,7 +67,7 @@ const JobDetails = () => {
 
   const handleSaveJob = async () => {
     if (!userInfo) {
-      navigate("/login");
+      setShowAuthModal(true);
       return;
     }
 
@@ -161,6 +163,12 @@ const JobDetails = () => {
       )}
 
       <div className="job-details-main">
+        <AuthPromptModal
+          visible={showAuthModal}
+          onClose={() => setShowAuthModal(false)}
+          onLogin={() => { setShowAuthModal(false); navigate('/login'); }}
+          onRegister={() => { setShowAuthModal(false); navigate('/register'); }}
+        />
         {/* Job Header Card */}
         <div className="job-header-card">
           <div>
@@ -186,7 +194,10 @@ const JobDetails = () => {
             >
               {isSaving ? 'Saving...' : isSaved ? 'Saved' : 'Save'}
             </button>
-            <button className="apply-btn" onClick={() => navigate(`/apply/${id}`)}>
+            <button className="apply-btn" onClick={() => {
+              if (!userInfo) setShowAuthModal(true);
+              else navigate(`/apply/${id}`);
+            }}>
               Apply
             </button>
           </div>

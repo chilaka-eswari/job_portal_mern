@@ -446,6 +446,10 @@
   margin-bottom: 15px;
   background: #f8f9fa;
   aspect-ratio: 8.5 / 11;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .template-thumb {
@@ -454,21 +458,171 @@
   object-fit: cover;
 }
 
+/* Mini live preview */
+.mini-resume {
+  width: 100%;
+  height: 100%;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  gap: 8px;
+}
+
+.mini-resume .mini-header {
+  padding-left: 8px;
+}
+
+.mini-name {
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.mini-title {
+  font-size: 0.9em;
+  color: #374151;
+}
+
+.mini-body {
+  font-size: 0.8em;
+  color: #6b7280;
+}
+
+.mini-skills {
+  margin-top: 6px;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.mini-subsection {
+  margin-top: 8px;
+}
+
+.mini-line {
+  font-size: 12px;
+  color: #4b5563;
+  margin-top: 4px;
+}
+
 .change-template-btn {
   width: 100%;
-  background: #f0f4ff;
-  color: #667eea;
-  border: 1px solid #667eea;
-  padding: 10px;
-  border-radius: 6px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ff7a50 0%, #e74c3c 100%);
+  color: white;
+  border: none;
+  padding: 12px 14px;
+  border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  font-weight: 800;
+  transition: all 0.18s ease;
+  box-shadow: 0 6px 18px rgba(231, 76, 60, 0.18);
 }
 
 .change-template-btn:hover {
-  background: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(231, 76, 60, 0.24);
+}
+
+/* Download button in preview */
+.download-btn {
+  width: 100%;
+  margin-top: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.selected-template-badge {
+  margin-top: 10px;
+  color: white;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.mini-entry {
+  margin-top: 8px;
+} 
+
+.mini-dates {
+  font-size: 11px;
+  color: #6b7280;
+  margin-top: 2px;
+}
+
+.mini-desc {
+  font-size: 12px;
+  color: #374151;
+  margin-top: 4px;
+}
+
+/* Hidden PDF resume styles */
+.pdf-resume-inner {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #111827;
+}
+
+/* Use template accent color */
+.preview-header-section h1 {
+  color: var(--accent-color);
+}
+
+.contact-info {
+  color: #6b7280;
+}
+.pdf-header h1 {
+  margin: 0 0 6px 0;
+  font-size: 26px;
+  color: var(--accent-color);
+}
+
+.pdf-header .pdf-title {
+  margin: 0;
+  color: #374151;
+  font-weight: 600;
+}
+
+.pdf-header .pdf-contact {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.pdf-section h3 {
+  margin: 18px 0 8px 0;
+  color: #0f172a;
+  border-bottom: 2px solid #e6eef9;
+  padding-bottom: 6px;
+}
+
+/* Preview section headings adopt template accent color */
+.preview-section h3 {
+  color: var(--accent-color);
+  border-bottom: 2px solid rgba(0,0,0,0.06);
+  padding-bottom: 6px;
+}
+
+.pdf-entry {
+  margin-bottom: 12px;
+}
+
+.pdf-skill-tag {
+  display: inline-block;
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 6px 8px;
+  margin: 6px 6px 0 0;
+  border-radius: 6px;
+  font-size: 12px;
 }
 
 /* ===== RESPONSIVE ===== */

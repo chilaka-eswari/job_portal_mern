@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const ResumeBuilder = ({ selectedTemplate, resumeData, onDataChange }) => {
   const [data, setData] = useState(resumeData);
@@ -182,7 +184,7 @@ const ResumeBuilder = ({ selectedTemplate, resumeData, onDataChange }) => {
   };
 
   return (
-    <div className="resume-builder-container">
+    <div className="resume-builder-container" style={{ '--accent-color': selectedTemplate?.color || '#667eea' }}>
       <div className="builder-content">
         <div className="form-section">
           {/* Personal Information */}
@@ -610,7 +612,20 @@ const ResumeBuilder = ({ selectedTemplate, resumeData, onDataChange }) => {
         <div className="preview-section">
           <div className="preview-header">
             <h3>📄 Resume Preview</h3>
-            <button className="download-btn">⬇️ Download PDF</button>
+            <button className="download-btn" onClick={async () => {
+              try {
+                const element = document.querySelector('.resume-preview .preview-content');
+                const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'pt', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save(`${(data.personalInfo.fullName || 'resume').replace(/\s+/g,'_')}.pdf`);
+              } catch (err) {
+                console.error(err);
+              }
+            }}>⬇️ Download PDF</button>
           </div>
           <div className="resume-preview">
             <div className="preview-content">

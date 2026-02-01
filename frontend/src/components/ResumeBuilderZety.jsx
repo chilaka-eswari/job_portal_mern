@@ -1,9 +1,22 @@
 import React, { useState } from "react";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import "./resume-builder-styles.css";
 
-const ResumeBuilderZety = ({ selectedTemplate, resumeData, onDataChange }) => {
+const ResumeBuilderZety = ({ selectedTemplate, resumeData, onDataChange, onChangeTemplate }) => {
   const [data, setData] = useState(resumeData);
   const [currentStep, setCurrentStep] = useState(0);
+
+  // Keep local data in sync when parent passes updated resumeData
+  React.useEffect(() => {
+    setData(resumeData);
+  }, [resumeData]);
+
+  // Helper to truncate long descriptions in mini preview
+  const truncate = (str, n = 80) => {
+    if (!str) return "";
+    return str.length > n ? str.slice(0, n) + "..." : str;
+  };
   
   const steps = [
     { id: 0, name: "Personal Info", icon: "👤" },
@@ -131,6 +144,103 @@ const ResumeBuilderZety = ({ selectedTemplate, resumeData, onDataChange }) => {
     };
     setData(updatedData);
     onDataChange(updatedData);
+  };
+
+  // Render a simple, printable resume HTML used to generate the PDF
+  const renderResumeForPdf = () => {
+    return (
+      <div className="pdf-resume-inner">
+        <div className="pdf-header">
+          <h1>{data.personalInfo.fullName}</h1>
+          <p className="pdf-title">{data.personalInfo.jobTitle}</p>
+          <p className="pdf-contact">
+            {data.personalInfo.email}
+            {data.personalInfo.phone && ` • ${data.personalInfo.phone}`}
+            {data.personalInfo.location && ` • ${data.personalInfo.location}`}
+          </p>
+        </div>
+
+        {data.personalInfo.summary && (
+          <div className="pdf-section">
+            <h3>Professional Summary</h3>
+            <p>{data.personalInfo.summary}</p>
+          </div>
+        )}
+
+        {data.experience.length > 0 && (
+          <div className="pdf-section">
+            <h3>Work Experience</h3>
+            {data.experience.map((exp) => (
+              <div key={exp.id} className="pdf-entry">
+                <div className="pdf-entry-title">
+                  <strong>{exp.jobTitle}</strong>{exp.company ? ` - ${exp.company}` : ""}
+                </div>
+                {exp.startDate && (
+                  <p className="pdf-dates">
+                    {exp.startDate}{exp.endDate ? ` - ${exp.endDate}` : " - Present"}
+                  </p>
+                )}
+                {exp.description && <p>{exp.description}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {data.education.length > 0 && (
+          <div className="pdf-section">
+            <h3>Education</h3>
+            {data.education.map((edu) => (
+              <div key={edu.id} className="pdf-entry">
+                <div className="pdf-entry-title">
+                  <strong>{edu.degree}</strong>{edu.institution ? ` - ${edu.institution}` : ""}
+                </div>
+                {edu.field && <p className="pdf-field">{edu.field}</p>}
+                {edu.grade && <p className="pdf-grade">GPA: {edu.grade}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {data.skills.length > 0 && (
+          <div className="pdf-section">
+            <h3>Skills</h3>
+            <div className="pdf-skills">
+              {data.skills.map((skill) => (
+                <span key={skill.id} className="pdf-skill-tag">{skill.skill}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {data.projects.length > 0 && (
+          <div className="pdf-section">
+            <h3>Projects</h3>
+            {data.projects.map((project) => (
+              <div key={project.id} className="pdf-entry">
+                <div className="pdf-entry-title"><strong>{project.projectName}</strong></div>
+                {project.technologies && <p className="pdf-tech">{project.technologies}</p>}
+                {project.description && <p>{project.description}</p>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const downloadPdf = async () => {
+    const element = document.getElementById("resume-to-pdf");
+    try {
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "pt", "a4");
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${(data.personalInfo.fullName || "resume").replace(/\s+/g, "_")}.pdf`);
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const renderStepContent = () => {
@@ -439,7 +549,7 @@ const ResumeBuilderZety = ({ selectedTemplate, resumeData, onDataChange }) => {
   };
 
   return (
-    <div className="resume-builder-zety">
+    <div className="resume-builder-zety" style={{ '--accent-color': selectedTemplate?.color || '#667eea' }}>
       {/* Sidebar */}
       <aside className="builder-sidebar">
         <div className="sidebar-header">
@@ -499,15 +609,71 @@ const ResumeBuilderZety = ({ selectedTemplate, resumeData, onDataChange }) => {
         <div className="preview-box">
           <h4>Preview</h4>
           <div className="resume-thumbnail">
-            {selectedTemplate && (
-              <img 
-                src={selectedTemplate.preview} 
-                alt="Resume preview"
-                className="template-thumb"
-              />
+            {selectedTemplate ? (
+              <div className="mini-resume" style={{borderLeft:`6px solid ${selectedTemplate.color}`}}>
+                <div className="mini-header">
+                  <div className="mini-name">{data.personalInfo.fullName || 'Your Name'}</div>
+                  <div className="mini-title">{data.personalInfo.jobTitle || selectedTemplate.name}</div>
+                </div>
+
+                <div className="mini-body">
+                  {data.personalInfo.email && <div className="mini-line">{data.personalInfo.email}</div>}
+                  {data.personalInfo.phone && <div className="mini-line">{data.personalInfo.phone}</div>}
+
+                  <div className="mini-subsection">
+                    <strong>Experience</strong>
+                    {data.experience && data.experience.length > 0 ? (
+                      data.experience.slice(0,2).map((exp) => (
+                        <div key={exp.id} className="mini-entry">
+                          <div className="mini-line"><strong>{exp.jobTitle || ''}</strong>{exp.company ? ` - ${exp.company}` : ''}</div>
+                          {exp.startDate && (
+                            <div className="mini-line mini-dates">{exp.startDate}{exp.endDate ? ` - ${exp.endDate}` : ' - Present'}</div>
+                          )}
+                          {exp.description && <div className="mini-line mini-desc">{truncate(exp.description, 90)}</div>}
+                        </div>
+                      ))
+                    ) : (
+                      <div className="mini-line">No experience added</div>
+                    )}
+                  </div>
+
+                  <div className="mini-subsection">
+                    <strong>Education</strong>
+                    {data.education && data.education.length > 0 ? (
+                      data.education.slice(0,2).map((edu) => (
+                        <div key={edu.id} className="mini-line">{edu.degree || edu.institution}</div>
+                      ))
+                    ) : (
+                      <div className="mini-line">No education added</div>
+                    )}
+                  </div>
+
+                  <div className="mini-subsection">
+                    <strong>Skills</strong>
+                    {data.skills && data.skills.length > 0 ? (
+                      <div className="mini-skills">{data.skills.slice(0,3).map(s=>s.skill).join(' • ')}</div>
+                    ) : (
+                      <div className="mini-line">No skills added</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="template-thumb" style={{display:'flex',alignItems:'center',justifyContent:'center',color:'#667eea'}}>No template</div>
             )}
           </div>
-          <button className="change-template-btn">Change template</button>
+          <button className="change-template-btn" onClick={() => onChangeTemplate && onChangeTemplate()}>Change template</button>
+          <button className="download-btn" onClick={downloadPdf}>⬇️ Download PDF</button>
+          {selectedTemplate && (
+            <div className="selected-template-badge" style={{background:selectedTemplate.color}}>
+              {selectedTemplate.name}
+            </div>
+          )}
+
+          {/* Hidden full resume for PDF generation (off-screen) */}
+          <div id="resume-to-pdf" style={{position:'absolute', left:-9999, top:0, width:794, padding:40, background:'#fff'}}>
+            {renderResumeForPdf()}
+          </div>
         </div>
       </aside>
     </div>
